@@ -1,12 +1,6 @@
-require("dotenv").config();
-const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
-const whatsapp = require("./whatsapp");
-const cors = require("cors");
-const authentication = require("./middlewares/authentication");
-const path = require("path");
-const fs = require("fs");
+require("dotenv").config(); const express = require("express"); const http = require("http"); const socketIo = require("socket.io"); const whatsapp = 
+require("./whatsapp"); const cors = require("cors"); const authentication = require("./middlewares/authentication"); const path = require("path"); const fs = 
+require("fs");
 
 const app = express();
 const server = http.createServer(app);
@@ -66,33 +60,5 @@ app.use(
 );
 
 server.listen(port, () => {
-  const whatsappStatusFile = path.resolve(
-    __dirname,
-    "file-data",
-    "whatsapp-status.json"
-  );
-  const whatsappQrcodeFile = path.resolve(
-    __dirname,
-    "file-data",
-    "whatsapp-qrcode.txt"
-  );
-
-  const statusContent = {
-    status: "loading",
-    message: `Loading Screen...`,
-  };
-
-  fs.writeFile(whatsappStatusFile, JSON.stringify(statusContent), (err) => {
-    if (err) {
-      console.error("Error to write whatsapp status to file:", err);
-    }
-  });
-  fs.writeFile(whatsappQrcodeFile, "", (err) => {
-    if (err) {
-      console.error("Gagal mengosongkan file:", err);
-    } else {
-      console.log("File berhasil dikosongkan");
-    }
-  });
   console.log(`Backend server running at http://localhost:${port}`);
 });
